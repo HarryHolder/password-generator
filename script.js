@@ -189,8 +189,9 @@ function getPasswordOptions() {
 }
 
 // Function for getting a random element from an array
+let randomArray = [];
+
 function getRandom(arr) {
-  let randomArray = [];
   for (let i = 0; i < passwordLength; i++) {
     let randomPicks = userChoice[Math.floor(Math.random() * userChoice.length)];
     randomArray.push(randomPicks);
@@ -204,11 +205,20 @@ function generatePassword() {
   return randomArray.join("");
 }
 
+// function to reset all choices
+function reset() {
+  randomArray = [];
+  password = 0;
+  userChoice = [];
+  passwordLength = 0;
+}
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  reset();
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -217,5 +227,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-console.log(randomArray);
