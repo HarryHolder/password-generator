@@ -94,19 +94,23 @@ let includeUpper; // user choice to include uppercase result
 let includeLower; // user choice to include lowercase result
 let passwordLength; // store length of the users desired password
 let userChoice; // array to hold all the options based on the users selected criteria
+let randomPicks; // array to hold the random selected characters
 
 // Function to prompt user for password options
 
 function getPasswordOptions() {
+  // User picks password length
   passwordLength = parseInt(
     prompt("Select your password length (between 10 & 64 characters")
-  ); // User picks password length
+  );
+  // If no value/not numerical value is entered
   if (!passwordLength) {
-    alert("This needs a value"); // If no value/not numerical value is entered
+    alert("This needs a value");
+    // If value is outside of required length
   } else if (passwordLength < 10 || passwordLength > 64) {
     passwordLength = parseInt(
       prompt("Your password should be between 10 & 64 characters")
-    ); // If value is outside of required length
+    );
   } else {
     includeNumber = confirm("Would you like your password to contain numbers?");
     includeLower = confirm(
@@ -180,20 +184,24 @@ function getPasswordOptions() {
   } else if (includeSpecChar) {
     userChoice = specialCharacters;
   }
+
+  // console.log(userChoice);  // Check is array is created with users selection
 }
 
 // Function for getting a random element from an array
-function getRandom(userChoice) {
-  for (let i = 0; i < passwordLength.length; i++) {
+function getRandom(arr) {
+  let randomArray = [];
+  for (let i = 0; i < passwordLength; i++) {
     let randomPicks = userChoice[Math.floor(Math.random() * userChoice.length)];
-    password.push(randomPicks);
+    randomArray.push(randomPicks);
   }
 }
 
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions();
-  getRandom();
+  getRandom(userChoice);
+  return randomArray.join("");
 }
 
 // Get references to the #generate element
@@ -209,3 +217,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+console.log(randomArray);
