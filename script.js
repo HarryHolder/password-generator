@@ -211,6 +211,10 @@ function reset() {
   password = 0;
   userChoice = [];
   passwordLength = 0;
+  includeNumber = false;
+  includeLower = false;
+  includeUpper = false;
+  includeSpecChar = false;
 }
 
 // Get references to the #generate element
